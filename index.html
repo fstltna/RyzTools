@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<title>Ryztools</title>
+
+		<link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.3.2.css" />
+		<!-- link rel="stylesheet" href="jquery.mobile-1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.css" / -->
+		<link rel="stylesheet" href="css/index.css" />
+
+<!-- 		<script type="text/javascript" src="cordova.js"></script> -->
+		<!-- script type="text/javascript" src="js/jquery.min.js"></script -->
+		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="jquery-mobile/jquery.mobile-1.3.2.js"></script>
+		<!-- script type="text/javascript" src="jquery.mobile-1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.js"></script -->
+		<script type="text/javascript" src="js/objects.json"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/pages.js"></script>
+	</head>
+	<body>
+		<div data-role="page" id="indexPage" data-theme="d">
+			<div data-role="header" data-theme="c">
+				<h1>Ryztools</h1>
+				<a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+				<a href="?page=settings" data-icon="gear" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Options</a>
+			</div>
+			<div data-role="content">
+				<div class="article">
+					<img src="jquery-mobile/images/ajax-loader.gif">
+				</div>
+			</div>
+			<div data-role="panel" id="left-panel" data-theme="c">
+				<ul data-role="listview" data-theme="d">
+					<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+					<li data-role="list-divider">Menu</li>
+					<li><a href="index.html">Index</a></li>
+					<li><a href="?page=character">Characters</a></li>
+					<li><a href="?page=guild">Guilds</a></li>
+					<li><a href="?page=inventory">Inventory</a></li>
+					<li><a href="?page=seasonchange">Season change</a></li>
+					<li><a href="?page=crafting/malus">Malus crafting</a></li>
+					<li><a href="?page=crafting/simulator">Crafting simulator</a></li>
+					<li><a href="?page=about">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

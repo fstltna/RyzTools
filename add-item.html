@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Ryztools</title>
+	</head>
+	<body>
+		<div data-role="dialog">
+			<div data-role="header" data-theme="d">
+				<h1>Pick material</h1>
+			</div>
+
+			<div data-role="content" data-theme="c">
+				<form id="materialPicker" data-ajax="false">
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class="fillWidth">
+						<input type="radio" name="material-quality" id="material-quality-basic" value="Basic" checked="checked" class="triggerUpdate" />
+						<label for="material-quality-basic">Basic</label>
+
+						<input type="radio" name="material-quality" id="material-quality-fine" value="Fine" class="triggerUpdate" />
+						<label for="material-quality-fine">Fine</label>
+
+						<input type="radio" name="material-quality" id="material-quality-choice" value="Choice" class="triggerUpdate" />
+						<label for="material-quality-choice">Choice</label>
+
+						<input type="radio" name="material-quality" id="material-quality-excellent" value="Excellent" class="triggerUpdate" />
+						<label for="material-quality-excellent">Excel</label>
+
+						<input type="radio" name="material-quality" id="material-quality-supreme" value="Supreme" class="triggerUpdate" />
+						<label for="material-quality-supreme">Supreme</label>
+					</fieldset>
+
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class="fillWidth">
+						<input type="radio" name="material-eco" id="material-eco-forest" value="2" checked="checked" class="triggerUpdate" />
+						<label for="material-eco-forest">Forest</label>
+
+						<input type="radio" name="material-eco" id="material-eco-desert" value="1" class="triggerUpdate" />
+						<label for="material-eco-desert">Desert</label>
+
+						<input type="radio" name="material-eco" id="material-eco-jungle" value="4" class="triggerUpdate" />
+						<label for="material-eco-jungle">Jungle</label>
+
+						<input type="radio" name="material-eco" id="material-eco-lakes" value="3" class="triggerUpdate" />
+						<label for="material-eco-lakes">Lakes</label>
+
+						<input type="radio" name="material-eco" id="material-eco-pr" value="6" class="triggerUpdate" />
+						<label for="material-eco-pr">P. R.</label>
+					</fieldset>
+
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class="fillWidth">
+						<input type="radio" name="material-loot" id="material-loot-0" value="0" checked="checked" class="triggerUpdate" />
+						<label for="material-loot-0">Foraged</label>
+
+						<input type="radio" name="material-loot" id="material-loot-1" value="1" class="triggerUpdate" />
+						<label for="material-loot-1">Looted</label>
+
+						<input type="radio" name="material-loot" id="material-loot--1" value="-1" class="triggerUpdate" />
+						<label for="material-loot--1">Other</label>
+					</fieldset>
+
+					<fieldset data-role="controlgroup" class="matList">
+					</fieldset>
+
+					<div data-role="fieldcontain">
+						<label for="material-amount">Amount:</label>
+						<input type="range" name="material-amount" id="material-amount" value="1" min="1" max="1"  />
+					</div>
+
+					<fieldset class="ui-grid-a">
+						<div class="ui-block-a">
+							<input type="submit" data-theme="b" name="submit" id="submit" value="Add mats">
+						</div>
+						<div class="ui-block-b">
+							<a href="#" data-role="button" data-rel="back" data-theme="c">Abort</a>
+						</div>
+					</fieldset>
+				</form>
+				<script>
+					var updateList = function (grade, eco, loot) {
+						var l = 0;
+						//console.log(grade + ' ' + eco + ' ' + loot);
+						$('.matList').empty();
+						$('#submit').removeAttr('disabled');
+						for (i in materials[grades[grade]]) {
+							if ((materials[grades[grade]][i]['eco'] === eco) && (materials[grades[grade]][i]['loot'] === loot)) {
+								$('.matList').append('<input type="radio" name="mat" id="mat-' + i + '" value="' + i + '"' + (l === 0 ? ' checked' : '') + ' /><label for="mat-' + i + '">' + itemNames[i] + '</label>');
+								l++;
+								$('#mat-' + i).checkboxradio().checkboxradio("refresh");
+							} else if ((grades[grade] < 40) && (materials[grades[grade]][i]['loot'] === loot)) {
+								$('.matList').append('<input type="radio" name="mat" id="mat-' + i + '" value="' + i + '"' + (l === 0 ? ' checked' : '') + ' /><label for="mat-' + i + '">' + itemNames[i] + '</label>');
+								l++;
+								$('#mat-' + i).checkboxradio().checkboxradio("refresh");
+							}
+						}
+						if (l === 0) {
+							$('#submit').attr('disabled', 'disabled');
+						}
+						$('.matList').controlgroup('refresh');
+					};
+					$('#material-amount').attr('max', sessionStorage.getItem('max'));
+					$('#material-amount').attr('value', sessionStorage.getItem('max'));
+					var materials = mats[matTypes[sessionStorage.getItem('material')]];
+					$('.matList').controlgroup();
+					/*
+					1: Desert
+					2: Forest
+					3: Lakes
+					4: Jungle
+
+					6: PR
+					*/
+					updateList('Basic', 2, 0);
+
+					$('.triggerUpdate').on('change', function () {
+						var loot = parseInt($('input[name="material-loot"]:checked', $('#materialPicker')).val());
+						var eco = parseInt($('input[name="material-eco"]:checked', $('#materialPicker')).val());
+						var quality = $('input[name="material-quality"]:checked', $('#materialPicker')).val();
+						updateList(quality, eco, loot);
+					});
+
+					$('#materialPicker').on('submit', function (e) {
+						e.preventDefault();
+						var amount = $('input[name="material-amount"]', $('#materialPicker')).val();
+						var mat = $('input[name="mat"]:checked', $('#materialPicker')).val();
+						var type = sessionStorage.getItem('material');
+
+						if (urlGet(type) !== false) {
+							if (urlGet(type)[mat] !== undefined) {
+								alert('Material type already added.');
+								return;
+							}
+						}
+
+						var url = document.location.search;
+						var newUrl = url + '&' + type + '[' + mat + ']=' + amount;
+						document.location.href = 'index.html' + newUrl;
+						return false;
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

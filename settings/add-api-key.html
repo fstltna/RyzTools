@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Ryztools</title>
+	</head>
+	<body>
+		<div data-role="dialog">
+			<div data-role="header" data-theme="d">
+				<h1>Add api key</h1>
+			</div>
+
+			<div data-role="content" data-theme="c">
+				<form id="addApiKey" data-ajax="false">
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<label for="key">Api key:</label>
+						<input type="text" name="key" id="key" value="" placeholder="Api key"/>
+					</div>
+				
+					<fieldset class="ui-grid-a">
+						<div class="ui-block-a">
+							<input type="submit" data-theme="b" name="submit" id="submit" value="Add key">
+						</div>
+						<div class="ui-block-b">
+							<a href="#" data-role="button" data-rel="back" data-theme="c">Abort</a>
+						</div>
+					</fieldset>
+				</form>
+				<script>
+					$('#addApiKey').on('submit', function (e) {
+						e.preventDefault();
+						var storage = window.localStorage;
+						var settings = JSON.parse(storage.getItem('settings'));
+						if (settings.apiKeys === undefined) {
+							settings.apiKeys = [];
+						};
+
+						removeArrayValue(settings.apiKeys, $('#key').val());
+
+						var type = $('#key').val().substring(0, 1);
+
+						if ((type === 'c') && (RyzomApi.getCharacter($('#key').val()) !== false)) {
+							settings.apiKeys.push($('#key').val());
+						} else if ((type === 'g') && (RyzomApi.getGuild($('#key').val()) !== false)) {
+							settings.apiKeys.push($('#key').val());
+						}
+						
+						storage.setItem('settings', JSON.stringify(settings));
+
+						document.location.href = '../index.html?page=settings';
+						return false;
+					});
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,7 @@
+On the crafting page, when selection items, should you be able to select multiple categories?
+* The list will be longer, we wanna keep it as short as possible due to the small screens.
+* You would have to check and uncheck to be able to swap from eg "Forest" to "Jungle" mats…
+
+There is no way to view common mats.
+* The common mats will show up ragardless of region when selecting fine or basic.
+* There is no reason to have a common button.

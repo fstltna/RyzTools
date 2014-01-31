@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<title>Ryztools</title>
+
+		<link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.3.2.css" />
+		<link rel="stylesheet" href="css/index.css" />
+
+<!--		<script type="text/javascript" src="cordova.js"></script> -->
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery-mobile/jquery.mobile-1.3.2.js"></script>
+		<script type="text/javascript" src="js/objects.json"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		
+		<!-- script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script -->
+	</head>
+	<body>
+		<div data-role="page" data-theme="d">
+			<div data-role="header" data-theme="c">
+				<h1>Ryztools</h1>
+				<a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+				<a href="settings.html" data-icon="gear" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Options</a>
+			</div>
+			<div data-role="content">
+				<div class="article">
+
+
+<style>
+	#map_canvas {
+		height: 100%;
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+	}
+	.ui-content {
+		padding: 0;
+	}
+</style>
+<div id="map_canvas" style="border: 1px solid #ccc; height: 100px;"></div>
+<script>
+
+jQuery(function($) {
+
+		function getNormalizedCoord(coord, zoom) {
+			var y = coord.y;
+			var x = coord.x;
+
+			// tile range in one direction range is dependent on zoom level
+			// 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc
+			var tileRange = 1 << zoom;
+
+			// don't repeat across y-axis (vertically)
+			if (y < 0 || y >= tileRange) {
+				return null;
+			}
+
+			// repeat across x-axis
+			if (x < 0 || x >= tileRange) {
+				x = (x % tileRange + tileRange) % tileRange;
+			}
+
+			return {
+				x: x,
+				y: y
+			};
+		}
+
+		var gameTypeOptions = {
+			getTileUrl: function (coord, zoom) {
+				var normalizedCoord = getNormalizedCoord(coord, zoom);
+				if (!normalizedCoord) {
+					return null;
+				}
+				var url = 'http://ryzom.byweb.no/map_slice/game/' + zoom + '/' + normalizedCoord.x + 'x' + normalizedCoord.y + '.jpg';
+				$.ajax({
+					url: url,
+					async: false,
+					error: function () {
+						url = 'http://ryzom.byweb.no/map_slice/black.jpg';
+					}
+				});
+				return url;
+			},
+			tileSize: new google.maps.Size(256, 256),
+			maxZoom: 10,
+			minZoom: 1,
+			name: "Game"
+		};
+
+		var ryzomTypeOptions = {
+			getTileUrl: function (coord, zoom) {
+				var normalizedCoord = getNormalizedCoord(coord, zoom);
+				if (!normalizedCoord) {
+					return null;
+				}
+				return "http://ryzom.byweb.no/map_slice/satellite/" + zoom + "/" + normalizedCoord.x + "x" + normalizedCoord.y + ".jpg";
+			},
+			tileSize: new google.maps.Size(256, 256),
+			maxZoom: 12,
+			minZoom: 1,
+			name: "Satellite"
+		};
+
+		var gameMapType = new google.maps.ImageMapType(gameTypeOptions);
+		var ryzomMapType = new google.maps.ImageMapType(ryzomTypeOptions);
+
+		var map;
+
+function getRealContentHeight () {
+	var header = $.mobile.activePage.find("div[data-role='header']:visible");
+	var footer = $.mobile.activePage.find("div[data-role='footer']:visible");
+	var content = $.mobile.activePage.find("div[data-role='content']:visible:visible");
+	var viewport_height = $(window).height();
+
+	var content_height = viewport_height - header.outerHeight() - footer.outerHeight();
+	if ((content.outerHeight() - header.outerHeight() - footer.outerHeight()) <= viewport_height) {
+		content_height -= (content.outerHeight() - content.height());
+	}
+	return content_height;
+}
+
+function setMapSize () {
+	$("#map_canvas").css('height', getRealContentHeight() - 2);
+}
+
+		function initialize () {
+			var center = new google.maps.LatLng(84.12, -170.42);
+			var mapOptions = {
+				center: center,
+				zoom: 6,
+				streetViewControl: false,
+				disableDoubleClickZoom: true,
+				mapTypeControlOptions: {
+					mapTypeIds: ["game", "ryzom"]
+				}
+			};
+
+			map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+			map.mapTypes.set("game", gameMapType);
+			map.mapTypes.set("ryzom", ryzomMapType);
+			map.setMapTypeId("game");
+		}
+
+setMapSize();
+		setTimeout(initialize, 1000);
+	});
+</script>
+
+
+
+
+				</div>
+			</div>
+			<div data-role="panel" id="left-panel" data-theme="c">
+				<ul data-role="listview" data-theme="d">
+					<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+					<li data-role="list-divider">Menu</li>
+					<li><a href="index.html">Index</a></li>
+					<li><a href="malus_crafting.html">Malus crafting</a></li>
+					<li class="ui-btn-active"><a href="maps.html">Maps</a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
