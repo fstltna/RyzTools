@@ -1,33 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id=“com.pocketfiction.ryztools version=“0.1.0” xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="no.byweb.ryzom" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="SplashScreen" value="splash" />
     <preference name="SplashScreenDelay" value="10000" />
     <name>Ryztools</name>
     <description>
         Ryztools - A collection of tools for the Ryzom MMORPG.
     </description>
-    <author email=“fastltna@ryzomcity.org" href="https://RyzomCity,org">
-        Marisa Giancarla (MarisaG)
+    <author email="tux@krageroby.no" href="http://ryzom.byweb.no">
+        Tux Solbakk (Drogos)
     </author>
     <content src="index.html" />
     <access origin="*" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
 </widget>
-
-    <icon src="icons/ios/icon.png" gap:platform="ios" width="57" height="57" />
-    <icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
-    <icon src="icons/ios/icon_at_2x.png" gap:platform="ios" width="114" height="114" />
-
-    <!-- retina iPad support: PhoneGap 2.5.0+ only -->
-    <icon src="icons/ios/icon-72_at_2x.png" gap:platform="ios" width="144" height="144" />
-
-    <gap:splash src="splash/ios/Default.png" gap:platform="ios" width="320" height="480" />
-    <gap:splash src="splash/ios/Default_at_2x.png" gap:platform="ios" width="640" height="960" />
-    <gap:splash src="splash/ios/Default_iphone5.png" gap:platform="ios" width="640" height="1136" />
-    <gap:splash src="splash/ios/Default-Landscape.png" gap:platform="ios" width="1024" height="748" />
-    <gap:splash src="splash/ios/Default-Portrait.png" gap:platform="ios" width="768" height="1004" />
-
-    <!-- retina iPad support: PhoneGap 2.5.0+ only -->
-    <gap:splash src="splash/ios/Default-Landscape_at_2x.png" gap:platform="ios" width="2048" height="1496" />
-    <gap:splash src="splash/ios/Default-Portrait_at_2x.png" gap:platform="ios" width="1536" height="2008" />
