@@ -12,4 +12,3 @@
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
 </widget>
-    <icon src="icon.png" gap:platform="ios" width="57" height="57" />
