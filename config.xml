@@ -4,8 +4,8 @@
     <description>
         Ryztools - A collection of tools for the Ryzom MMORPG.
     </description>
-    <author email="tux@krageroby.no" href="http://ryzom.byweb.no">
-        Tux Solbakk (Drogos)
+    <author email="fstltna@ryzomcity.org" href="http://ryzomcity.org">
+        Marisa Giancarla (MarisaG)
     </author>
     <content src="index.html" />
     <access origin="*" />
