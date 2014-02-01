@@ -271,7 +271,7 @@ var loadCrafting_simulatorPage = function () {
 			$('#indexPage .article').append('<br><div class="craftResult">Craft result.</div>');
 
 			$('.craftResult').empty();
-			$('.craftResult').load('http://ryztools.ryzom.byweb.no/' + document.location.search, function (response, status, xhr) {
+			$('.craftResult').load('http://ryztoolsapi.ryzomcity.org/' + document.location.search, function (response, status, xhr) {
 				if (status == 'error') {
 					var msg = 'Sorry but there was an error: ';
 					$('.craftResult').html(msg + xhr.status + ' ' + xhr.statusText);
