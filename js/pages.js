@@ -2,7 +2,7 @@
 |                          Index                             |
 \************************************************************/
 var loadIndexPage = function () {
-	$('#indexPage .article').html('<h1>Ryztools v 1.3.3</h1>\
+	$('#indexPage .article').html('<h1>Ryztools v 1.3.4</h1>\
 	<p>\
 		Welcome to Ryztools.\
 	</p>');
@@ -26,7 +26,7 @@ var loadAboutPage = function () {
 <p>For more news of Ryzom see the portal at <a href="https://ryzomcity.org">https://RyzomCity.org</a></p>\
 <p>This app was written both for me to learn about phone app development, and to aid people that do not wanna use an external browser to look things up.</p>\
 <p>\
-	Have ideas, comments, questions, found a bug, etc? Talk to me in game, send me an in game mail, click the contact developer button or look me up on irc (freenode). Or you may contact me at support@ryzomcity.org\
+	Have ideas, comments, questions, found a bug, etc? Talk to me in game, send me an in game mail, click the contact developer button or look me up on irc (freenode). Or you may contact me at <a href="mailto:support@ryzomcity.org">support@ryzomcity.org</a>\
 	All feedbacks for both constructive critisism or just a comment on what you think is always welcome.\
 </p>\
 <p>-- Drogos, Spiritus Artificis</p>\
