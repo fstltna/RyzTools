@@ -623,13 +623,3 @@ div.jqm-demo-link {
 						float: none !important;
 					}
 
-/* add for ios 7 title bar */
-function onDeviceReady() {
-    if (parseFloat(window.device.version) >= 7.0) {
-          document.body.style.marginTop = "20px";
-    }
-}
-  
-document.addEventListener('deviceready', onDeviceReady, false);
-/* end of title bar code */
-

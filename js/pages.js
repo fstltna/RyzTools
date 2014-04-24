@@ -2,7 +2,7 @@
 |                          Index                             |
 \************************************************************/
 var loadIndexPage = function () {
-	$('#indexPage .article').html('<h1>RyzTools v 1.1.0</h1>\
+	$('#indexPage .article').html('<h1>RyzTools v 1.2.0</h1>\
 	<p>\
 		Welcome to Ryztools.\
 	</p>');
