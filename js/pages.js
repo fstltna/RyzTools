@@ -2,7 +2,7 @@
 |                          Index                             |
 \************************************************************/
 var loadIndexPage = function () {
-	$('#indexPage .article').html('<h1>RyzTools v 1.3.0</h1>\
+	$('#indexPage .article').html('<h1>Ryztools v 1.3.2</h1>\
 	<p>\
 		Welcome to Ryztools.\
 	</p>');
@@ -22,8 +22,6 @@ var loadIndexPage = function () {
 var loadAboutPage = function () {
 	$('#indexPage .article').html('<h1>About Ryztools</h1>\
 \
-<p><b>To use this app you must get a API key from Ryzom</b>. You can do that here: <a href=http://app.ryzom.com/app_ryzomapi/index.php?from_index=1>http://app.ryzom.com/app_ryzomapi/index.php?from_index=1</a></p>
-<p>For more news of Ryzom see the portal at <a href=https://ryzomcity.org>https://RyzomCity.org</a></p>
 <p>This app was written both for me to learn about phone app development, and to aid people that do not wanna use an external browser to look things up.</p>\
 <p>\
 	Have ideas, comments, questions, found a bug, etc? Talk to me in game, send me an in game mail, click the contact developer button or look me up on irc (freenode).\
